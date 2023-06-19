@@ -1,31 +1,11 @@
 # US-visa-appointment-notifier
 
-This is just a script I put together to check and notify me via email ([SendGrid](https://sendgrid.com/)) when there's an earlier date before my initial appointment date. It doesn't handle **rescheduling**. 
-
-
-```
-$ npm start
-=====>>> Step: starting process with 250 tries left
-=====>>> Step: logging in
-=====>>> Step: checking for schedules
-[{"date":"2023-02-08","business_day":true},{"date":"2023-04-26","business_day":true},{"date":"2023-10-11","business_day":true}]
-=====>>> Step: starting process with 249 tries left
-=====>>> Step: checking for schedules
-[{"date":"2023-04-26","business_day":true},{"date":"2023-10-11","business_day":true}]
-=====>>> Step: starting process with 248 tries left
-=====>>> Step: checking for schedules
-[{"date":"2023-10-11","business_day":true}]
-=====>>> Step: sending an email to schedule for 2023-10-11
-...
-```
-
-![email notification sample](./email-screen-shot.png)
-
+This is just a script I put together to check and notify me via email ([SendGrid](https://sendgrid.com/)) when there's an earlier date before my initial appointment date. It doesn't handle **rescheduling**.
 
 ## How it works
 
 * Logs you into the portal
-* checks for schedules by day 
+* checks for schedules by day
 * If there's a date before your initial appointment, it notifies you via email
 * If no dates found, the process waits for set amount of seconds to cool down before restarting and will stop when it reaches the set max retries.
 
@@ -35,7 +15,7 @@ $ npm start
 
 copy the example configuration file exampe in `.env.example`, rename the copied version to `.env` and replace the values.
 
-### SendGrid config values 
+### SendGrid config values
 
 You can create a free account with https://www.sendgrid.com/ which should be sufficient and use the provided sandbox domain on your dashboard. The `SENDGRID_API_KEY` can be found in your SendGrid settings, it starts with `SG.xxxxxx`. You'll need to add authorised sending email.
 
@@ -48,6 +28,6 @@ You can create a free account with https://www.sendgrid.com/ which should be suf
 
 ## How to use it
 
-* clone the repo 
+* clone the repo
 * run `npm i` within the cloned repo directory
 * start the process with `npm start`
