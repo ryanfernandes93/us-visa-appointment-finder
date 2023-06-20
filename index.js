@@ -37,21 +37,13 @@ const notifyMe = async (earliestDate) => {
     text: `Hurry and schedule for ${formattedDate} before it is taken.`
   })
 }
-
-const checkForSchedules = async (page) => {
-  logStep('checking for schedules');
-  await page.setExtraHTTPHeaders({
-    'Accept': 'application/json, text/javascript, */*; q=0.01',
-    'X-Requested-With': 'XMLHttpRequest'
-  });
-  await page.goto(siteInfo.APPOINTMENTS_JSON_URL);
-
+const getDatesForFacility = async (page, url) => {
+  await page.goto(url);
   const originalPageContent = await page.content();
-  const bodyText = await page.evaluate(() => {
-    return document.querySelector('body').innerText
-  });
-
   try{
+    const bodyText = await page.evaluate(() => {
+      return document.querySelector('body').innerText
+    });
     console.log(bodyText);
     const parsedBody =  JSON.parse(bodyText);
 
@@ -60,14 +52,26 @@ const checkForSchedules = async (page) => {
     }
 
     const dates =parsedBody.map(item => parseISO(item.date));
-    const [earliest] = dates.sort(compareAsc)
-
-    return earliest;
+    return dates;
   }catch(err){
     console.log("Unable to parse page JSON content", originalPageContent);
     console.error(err)
     isLoggedIn = false;
   }
+}
+const checkForSchedules = async (page) => {
+  logStep('checking for schedules');
+  await page.setExtraHTTPHeaders({
+    'Accept': 'application/json, text/javascript, */*; q=0.01',
+    'X-Requested-With': 'XMLHttpRequest'
+  });
+  const combinedDates = [];
+  for (let url of siteInfo.APPOINTMENTS_JSON_URLS) {
+    const dates = await getDatesForFacility(page, url);
+    combinedDates.push(...dates);
+  }
+  const [earliest] = combinedDates.sort(compareAsc)
+  return earliest;
 }
 
 

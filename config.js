@@ -9,8 +9,11 @@ module.exports = {
     SCHEDULE_ID: process.env.SCHEDULE_ID,
     FACILITY_ID: process.env.FACILITY_ID,
 
-    get APPOINTMENTS_JSON_URL(){
-      return `https://ais.usvisa-info.com/${this.COUNTRY_CODE}/niv/schedule/${this.SCHEDULE_ID}/appointment/days/${this.FACILITY_ID}.json?appointments%5Bexpedite%5D=false`
+    get APPOINTMENTS_JSON_URLS(){
+      const facilites = this.FACILITY_ID.split(',');
+      return facilites.map(facilityId => (
+        `https://ais.usvisa-info.com/${this.COUNTRY_CODE}/niv/schedule/${this.SCHEDULE_ID}/appointment/days/${facilityId}.json?appointments%5Bexpedite%5D=false`
+      ));
     },
 
     get LOGIN_URL () {

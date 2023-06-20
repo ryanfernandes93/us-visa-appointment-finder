@@ -23,6 +23,7 @@ You can create a free account with https://www.sendgrid.com/ which should be suf
 ## FAQ
 
 * How do I get my facility ID - https://github.com/theoomoregbee/US-visa-appointment-notifier/issues/3
+* If required, enter more than one facility id in .env file comma separated without spaces
 * How do I get my schedule ID - https://github.com/theoomoregbee/US-visa-appointment-notifier/issues/8, https://github.com/theoomoregbee/US-visa-appointment-notifier/issues/7#issuecomment-1372565292
 * How to setup Mailgun Authorised recipients - https://github.com/theoomoregbee/US-visa-appointment-notifier/issues/5
 
