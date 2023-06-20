@@ -1,5 +1,6 @@
 # US-visa-appointment-notifier
-
+This project is a modified version of [us-visa-appointment-notifier](https://github.com/theoomoregbee/US-visa-appointment-notifier). Credits to the original author.
+Compared to the original project, this one uses Sendgrid (free 100 emails/day) instead of MailGun (30 day free trial) and it allows to simultaneosly monitor mutliple location schedules.
 This is just a script I put together to check and notify me via email ([SendGrid](https://sendgrid.com/)) when there's an earlier date before my initial appointment date. It doesn't handle **rescheduling**.
 
 ## How it works
